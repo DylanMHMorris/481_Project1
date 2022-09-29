@@ -31,28 +31,28 @@ def actions(board):
     """
     raise NotImplementedError
 
-# open for take
+# Kevin
 def result(board, action):
     """
     Returns the board that results from making move (i, j) on the board.
     """
     raise NotImplementedError
 
-# open for take
+# Kevin 
 def winner(board):
     """
     Returns the winner of the game, if there is one.
     """
     raise NotImplementedError
 
-# open for take
+# Dylan T
 def terminal(board):
     """
     Returns True if game is over, False otherwise.
     """
     raise NotImplementedError
 
-# open for take
+# Dylan T
 def score(board):
     """
     Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
