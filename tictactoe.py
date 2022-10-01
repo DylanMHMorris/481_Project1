@@ -2,6 +2,7 @@
 Tic Tac Toe Player
 """
 
+import copy
 import math
 from copy import deepcopy
 
@@ -44,16 +45,54 @@ def result(board, action):
     """
     Returns the board that results from making move (i, j) on the board.
     """
-    raise NotImplementedError
+    # create new copy of board
+    # take in action from new board
+    # set new board to intial player board
+    newBoard = copy.deepcopy(board)
+    newBoard[action[0]][action[1]] = player(board)
 
+    return newBoard
 
 # Kevin
 def winner(board):
     """
     Returns the winner of the game, if there is one.
     """
-    raise NotImplementedError
+    # increment row to determine winner at any row
+    for row in range(3):
+        # check for winner horizontally
+        if board[row][0] == board[row][1] == board[row][2]:
+            # check position at row nth and column 0-2
+            # return symbol from winning position
+            if board[row][0] == X:
+                return X
+            elif board[row][0] == O:
+                return O
 
+    for col in range(3):
+    # check for winner vertically
+        if board[0][col] == board[1][col] == board[2][col]:
+            # check position at col nth and row 0-2
+            # return symbol from winning position
+            if board[0][col] == X:
+                return X
+            elif board[0][col] == O:
+                return O
+
+    # check for winner diagonally from top left to bottom right
+    if board[0][0] == board[1][1] == board[2][2]:
+        # return symbol from winning position
+        if board[0][0] == X:
+            return X
+        elif board[0][0] == O:
+            return O
+    # check for winner diagonally from bottom left to top right
+    if board[0][2] == board[1][1] == board[2][0]:
+        # return symbol from winning position
+        if board[0][2] == X:
+            return X
+        elif board[0][2] == O:
+            return O
 
 # Dylan T
 def terminal(board):
