@@ -54,7 +54,17 @@ def actions(board):
     """
     Returns set of all possible actions (i, j) available on the board.
     """
-    raise NotImplementedError
+    #creates storage for possible actions player can take
+    possible_actions = set()
+    #shifts through board to see what spots are available 
+    for x in range(len(board)):
+        for y in range(3):
+            #if spot on board is empty add it to possible actions
+            if board[x][y] == EMPTY:
+                possible_actions.add((x,y))
+    #return set of possible actions         
+    return possible_actions
+    # raise NotImplementedError
 
 
 # Kevin
