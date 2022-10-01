@@ -28,8 +28,25 @@ def initial_state():
 def player(board):
     """
     Returns player who has the next turn on a board.
-    """
-    raise NotImplementedError
+    """    
+    if board == initial_state():
+        #if the game has not started yet X always has first move and will exit function early
+        return X 
+    #sets initial number for turns taken for each player
+    Xturns = 0
+    Oturns = 0
+    
+    #counts how many x's and o's are placed on board
+    for row in board: 
+     Xturns += row.count(X)
+     Oturns += row.count(O)   
+    
+    #returns player who has taken less turns 
+    if Xturns <= Oturns:
+        return X
+    else:
+        return O
+    #raise NotImplementedError
 
 
 # Dylan M
