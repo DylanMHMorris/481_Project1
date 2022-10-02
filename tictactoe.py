@@ -28,20 +28,20 @@ def initial_state():
 def player(board):
     """
     Returns player who has the next turn on a board.
-    """    
+    """
     if board == initial_state():
         #if the game has not started yet X always has first move and will exit function early
-        return X 
+        return X
     #sets initial number for turns taken for each player
     Xturns = 0
     Oturns = 0
-    
+
     #counts how many x's and o's are placed on board
-    for row in board: 
+    for row in board:
      Xturns += row.count(X)
-     Oturns += row.count(O)   
-    
-    #returns player who has taken less turns 
+     Oturns += row.count(O)
+
+    #returns player who has taken less turns
     if Xturns <= Oturns:
         return X
     else:
@@ -56,13 +56,13 @@ def actions(board):
     """
     #creates storage for possible actions player can take
     possible_actions = set()
-    #shifts through board to see what spots are available 
+    #shifts through board to see what spots are available
     for x in range(len(board)):
         for y in range(3):
             #if spot on board is empty add it to possible actions
             if board[x][y] == EMPTY:
                 possible_actions.add((x,y))
-    #return set of possible actions         
+    #return set of possible actions
     return possible_actions
     # raise NotImplementedError
 
@@ -130,7 +130,17 @@ def terminal(board):
     """
     Returns True if game is over, False otherwise.
     """
-    raise NotImplementedError
+    # Check to see if there is a winner
+    if winner(board):
+        return True
+    # If there is not a winner, check to see if all possible moves have been made
+    elif not actions(board):
+        return True
+    # At this point there are no winners and no possible moves to be made
+    else:
+        return False
+
+#    raise NotImplementedError
 
 
 # Dylan T
@@ -138,7 +148,19 @@ def score(board):
     """
     Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
     """
-    raise NotImplementedError
+    # Check if the game has ended
+    if terminal(board):
+        # If the winner of the game is X return a 1
+        if winner(board) == X:
+            return 1
+        # If the winner of the game is O return a -1
+        elif winner(board) == O:
+            return -1
+        # If neither X or O won, return a 0 to indicate a tie
+        else:
+            return 0
+
+    #raise NotImplementedError
 
 
 def minvalue(board):
