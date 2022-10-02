@@ -74,9 +74,8 @@ def result(board, action):
     """
     # raise exception errors for out of bounds or position taken
     if action not in actions(board):
-        raise Exception("Out of bound Position")
-    if newBoard[action[0]][action[1]] != EMPTY:
-        raise Exception("Position already been taken")
+        raise Exception("Placement is out of bound or has been taken")
+
     # create new copy of board
     # take in action from new board
     # set new board to intial player board
