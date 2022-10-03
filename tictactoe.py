@@ -7,11 +7,6 @@ import math
 from copy import deepcopy
 
 
-class InvalidMove(Exception):
-    "Custom exception to be raised in the results() when an invalid move is passed."
-    pass
-
-
 X = "X"
 O = "O"
 EMPTY = None
@@ -30,23 +25,23 @@ def player(board):
     Returns player who has the next turn on a board.
     """
     if board == initial_state():
-        #if the game has not started yet X always has first move and will exit function early
+        # if the game has not started yet X always has first move and will exit function early
         return X
-    #sets initial number for turns taken for each player
+    # sets initial number for turns taken for each player
     Xturns = 0
     Oturns = 0
 
-    #counts how many x's and o's are placed on board
+    # counts how many x's and o's are placed on board
     for row in board:
-     Xturns += row.count(X)
-     Oturns += row.count(O)
+        Xturns += row.count(X)
+        Oturns += row.count(O)
 
-    #returns player who has taken less turns
+    # returns player who has taken less turns
     if Xturns <= Oturns:
         return X
     else:
         return O
-    #raise NotImplementedError
+    # raise NotImplementedError
 
 
 # Dylan M
@@ -54,15 +49,15 @@ def actions(board):
     """
     Returns set of all possible actions (i, j) available on the board.
     """
-    #creates storage for possible actions player can take
+    # creates storage for possible actions player can take
     possible_actions = set()
-    #shifts through board to see what spots are available
+    # shifts through board to see what spots are available
     for x in range(len(board)):
         for y in range(3):
-            #if spot on board is empty add it to possible actions
+            # if spot on board is empty add it to possible actions
             if board[x][y] == EMPTY:
-                possible_actions.add((x,y))
-    #return set of possible actions
+                possible_actions.add((x, y))
+    # return set of possible actions
     return possible_actions
     # raise NotImplementedError
 
@@ -84,6 +79,7 @@ def result(board, action):
 
     return newBoard
 
+
 # Kevin
 def winner(board):
     """
@@ -101,7 +97,7 @@ def winner(board):
                 return O
 
     for col in range(3):
-    # check for winner vertically
+        # check for winner vertically
         if board[0][col] == board[1][col] == board[2][col]:
             # check position at col nth and row 0-2
             # return symbol from winning position
@@ -125,6 +121,7 @@ def winner(board):
         elif board[0][2] == O:
             return O
 
+
 # Dylan T
 def terminal(board):
     """
@@ -139,6 +136,7 @@ def terminal(board):
     # At this point there are no winners and no possible moves to be made
     else:
         return False
+
 
 #    raise NotImplementedError
 
@@ -160,7 +158,7 @@ def score(board):
         else:
             return 0
 
-    #raise NotImplementedError
+    # raise NotImplementedError
 
 
 def minvalue(board):

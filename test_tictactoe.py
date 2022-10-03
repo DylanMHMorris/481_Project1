@@ -10,7 +10,7 @@ class TestActions:
 
     def test_oneSpot(self):
         board = [[X, O, X], [O, X, O], [EMPTY, X, O]]
-        assert actions(board) == [(2, 0)]
+        assert actions(board) == {(2, 0)}
 
 
 class TestWinner:
@@ -50,65 +50,64 @@ class TestWinner:
         board2 = [[EMPTY, T, EMPTY]] * 3
         board3 = [[EMPTY, EMPTY, T]] * 3
         assert winner(board1) == winner(board2) == winner(board3) == T
-    
+
     def test_draw(self):
-        board = [[X,O,X],[X,X,O],[O,X,O]]
+        board = [[X, O, X], [X, X, O], [O, X, O]]
         assert winner(board) is None
 
 
 class TestPlayer:
     def test_initial(self):
         assert player(initial_state()) == X
-    
+
     def test_X(self):
-        board = [[X,O,X], [O,X,O], [EMPTY]*3]
+        board = [[X, O, X], [O, X, O], [EMPTY] * 3]
         assert player(board) == X
-    
+
     def test_O(self):
-        board = [[X,O,X], [O,X,O], [X,EMPTY, EMPTY]]
+        board = [[X, O, X], [O, X, O], [X, EMPTY, EMPTY]]
         assert player(board) == O
+
 
 class TestResult:
     def test_invalid_OOB(self):
         board = initial_state()
-        with pytest.raises(InvalidMove):
-            result(board, (3,1))
-    
+        with pytest.raises(Exception):
+            result(board, (3, 1))
+
     def test_space_taken(self):
-        board = [[X,EMPTY, EMPTY], [EMPTY]*3, [EMPTY]*3]
-        with pytest.raises(InvalidMove):
-            result(board, (0,0))
+        board = [[X, EMPTY, EMPTY], [EMPTY] * 3, [EMPTY] * 3]
+        with pytest.raises(Exception):
+            result(board, (0, 0))
 
     def test_X_move(self):
         board = initial_state()
         original_board = deepcopy(board)
-        expected_board = [[X,EMPTY, EMPTY], [EMPTY]*3, [EMPTY]*3]
-        assert result(board,(0,0)) == expected_board
+        expected_board = [[X, EMPTY, EMPTY], [EMPTY] * 3, [EMPTY] * 3]
+        assert result(board, (0, 0)) == expected_board
         assert board == original_board
-    
+
     def test_O_move(self):
-        board = [[X,EMPTY, EMPTY], [EMPTY]*3, [EMPTY]*3]
+        board = [[X, EMPTY, EMPTY], [EMPTY] * 3, [EMPTY] * 3]
         original_board = deepcopy(board)
-        expected_board = [[X,O, EMPTY], [EMPTY]*3, [EMPTY]*3]
-        assert result(board,(0,1)) == expected_board
+        expected_board = [[X, O, EMPTY], [EMPTY] * 3, [EMPTY] * 3]
+        assert result(board, (0, 1)) == expected_board
         assert board == original_board
+
 
 class TestMinimax:
     def test_X_win(self):
-        board = [[X,X, EMPTY], [O, O, EMPTY], [EMPTY]*3]
-        assert minimax(board) == (0,2)
+        board = [[X, X, EMPTY], [O, O, EMPTY], [EMPTY] * 3]
+        assert minimax(board) == (0, 2)
 
     def test_block_O(self):
-        board = [[O,O, EMPTY], [EMPTY, X, EMPTY], [EMPTY, EMPTY, X]]
-        assert minimax(board) == (0,2)
-    
+        board = [[O, O, EMPTY], [EMPTY, X, EMPTY], [EMPTY, EMPTY, X]]
+        assert minimax(board) == (0, 2)
+
     def test_O_win(self):
-        board = [ [EMPTY, X, EMPTY], [O,O, EMPTY],[EMPTY, X, X]]
-        assert minimax(board) == (1,2)
+        board = [[EMPTY, X, EMPTY], [O, O, EMPTY], [EMPTY, X, X]]
+        assert minimax(board) == (1, 2)
 
     def test_block_X(self):
-        board = [[X,O, EMPTY], [O, X, EMPTY], [EMPTY, X, EMPTY]]
-        assert minimax(board) == (2,2)
-
-
-
+        board = [[X, O, EMPTY], [O, X, EMPTY], [EMPTY, X, EMPTY]]
+        assert minimax(board) == (2, 2)
