@@ -2,6 +2,8 @@
 Tic Tac Toe Player
 """
 
+# Dylan Morris, Michael Morikawa, Kevin La, Dylan Tran
+
 import copy
 import math
 from copy import deepcopy
