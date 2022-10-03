@@ -162,8 +162,13 @@ def score(board):
 
 
 def minvalue(board):
+    """
+    Helper function for minimax(), find the min value for a given board
+    """
+    # Base case
     if terminal(board):
         return score(board)
+        
     v = math.inf
     for action in actions(board):
         v = min(v, maxvalue(result(board, action)))
@@ -171,8 +176,13 @@ def minvalue(board):
 
 
 def maxvalue(board):
+    """
+    Helper function for minimax(), find the max value for a given board
+    """
+    # Base case
     if terminal(board):
         return score(board)
+
     v = -math.inf
     for action in actions(board):
         v = max(v, minvalue(result(board, action)))
@@ -184,22 +194,37 @@ def minimax(board):
     """
     Returns the optimal action for the current player on the board.
     """
+
+    # If the board is filled or the game has a winner return None
     if terminal(board):
         return None
 
     optimal_action = None
-    if player(board) == X:
+
+    # Store turn to prevent an uneeded call to player
+    turn = player(board)
+    if turn == X:
+        # Initialize best_val as negative infinity
         best_val = -math.inf
+        # Check each valid action to find the best move
         for action in actions(board):
+            # After making the move what is the best outcome for O
             value = minvalue(result(board, action))
+            # Choose the action that creates the best outcome for X(higher values)
             if value > best_val:
                 best_val = value
                 optimal_action = action
-    elif player(board) == O:
+    elif turn == O:
+        # Initialize best_val as infinity
         best_val = math.inf
         for action in actions(board):
+            # After making the move what is the best outcome for X
             value = maxvalue(result(board, action))
+            # Choose action that creates best outcome for O(lower value)
             if value < best_val:
                 best_val = value
                 optimal_action = action
+
+    # Note guaranteed to not be None as there should at least one valid move to make
+    # and and optimal action is always found by using +/- infinities
     return optimal_action
