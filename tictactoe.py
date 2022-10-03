@@ -18,8 +18,6 @@ def initial_state():
     """
     return [[EMPTY, EMPTY, EMPTY], [EMPTY, EMPTY, EMPTY], [EMPTY, EMPTY, EMPTY]]
 
-
-# Dylan M
 def player(board):
     """
     Returns player who has the next turn on a board.
@@ -44,7 +42,6 @@ def player(board):
     # raise NotImplementedError
 
 
-# Dylan M
 def actions(board):
     """
     Returns set of all possible actions (i, j) available on the board.
@@ -62,7 +59,6 @@ def actions(board):
     # raise NotImplementedError
 
 
-# Kevin
 def result(board, action):
     """
     Returns the board that results from making move (i, j) on the board.
@@ -80,7 +76,6 @@ def result(board, action):
     return newBoard
 
 
-# Kevin
 def winner(board):
     """
     Returns the winner of the game, if there is one.
@@ -122,7 +117,6 @@ def winner(board):
             return O
 
 
-# Dylan T
 def terminal(board):
     """
     Returns True if game is over, False otherwise.
@@ -141,7 +135,6 @@ def terminal(board):
 #    raise NotImplementedError
 
 
-# Dylan T
 def score(board):
     """
     Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
@@ -189,7 +182,6 @@ def maxvalue(board):
     return v
 
 
-# Michael M
 def minimax(board):
     """
     Returns the optimal action for the current player on the board.
